@@ -47,7 +47,7 @@ body {
 }
 
 
-/* ---------------- BACKGROUND HEARTS ---------------- */
+/* ================= FLOATING HEARTS ================= */
 
 .heart-bg {
 
@@ -63,6 +63,8 @@ body {
         floatHeart linear infinite;
 
     pointer-events: none;
+
+    z-index: 0;
 }
 
 @keyframes floatHeart {
@@ -91,12 +93,16 @@ body {
 }
 
 
-/* ---------------- 3D CARD ---------------- */
+/* ================= CARD ================= */
 
 .scene {
 
     width: 92%;
     max-width: 450px;
+
+    position: relative;
+
+    z-index: 10;
 
     transform-style: preserve-3d;
 }
@@ -112,8 +118,8 @@ body {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.95),
-            rgba(255,235,242,0.85)
+            rgba(255,255,255,0.96),
+            rgba(255,235,242,0.90)
         );
 
     border:
@@ -162,7 +168,7 @@ body {
 }
 
 
-/* ---------------- 3D HEART ---------------- */
+/* ================= HEART ================= */
 
 .big-heart {
 
@@ -200,6 +206,8 @@ body {
 }
 
 
+/* ================= TEXT ================= */
+
 h1 {
 
     color: #e83369;
@@ -216,7 +224,6 @@ h1 {
         translateZ(35px);
 }
 
-
 .message {
 
     color: #666;
@@ -232,13 +239,13 @@ h1 {
 }
 
 
-/* ---------------- BUTTONS ---------------- */
+/* ================= BUTTONS ================= */
 
 .buttons {
 
     position: relative;
 
-    height: 85px;
+    height: 90px;
 
     transform:
         translateZ(40px);
@@ -263,7 +270,6 @@ button {
     font-family: inherit;
 }
 
-
 #yesBtn {
 
     color: white;
@@ -281,6 +287,10 @@ button {
 
         inset 0 1px 1px
         rgba(255,255,255,0.5);
+
+    position: relative;
+
+    z-index: 20;
 }
 
 #yesBtn:hover {
@@ -293,7 +303,6 @@ button {
         0 15px 30px
         rgba(233,30,99,0.45);
 }
-
 
 #noBtn {
 
@@ -310,14 +319,19 @@ button {
     box-shadow:
         0 7px 15px
         rgba(0,0,0,0.1);
+
+    z-index: 20;
 }
 
 
-/* ---------------- DATE SCREEN ---------------- */
+/* ================= HIDDEN ================= */
 
 .hidden {
-    display: none;
+    display: none !important;
 }
+
+
+/* ================= DATE SCREEN ================= */
 
 .date-title {
 
@@ -340,6 +354,10 @@ button {
     text-align: left;
 
     margin-bottom: 18px;
+
+    position: relative;
+
+    z-index: 20;
 }
 
 label {
@@ -363,13 +381,18 @@ input {
 
     border: 2px solid #ffd0dc;
 
-    background: rgba(255,255,255,0.8);
+    background:
+        rgba(255,255,255,0.9);
 
     font-size: 16px;
 
     outline: none;
 
     transition: 0.2s;
+
+    position: relative;
+
+    z-index: 20;
 }
 
 input:focus {
@@ -381,6 +404,8 @@ input:focus {
         rgba(255,92,138,0.1);
 }
 
+
+/* ================= CONFIRM BUTTON ================= */
 
 .confirm {
 
@@ -400,10 +425,36 @@ input:focus {
     box-shadow:
         0 10px 25px
         rgba(217,30,96,0.3);
+
+    position: relative;
+
+    z-index: 100;
+
+    pointer-events: auto;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.confirm:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(217,30,96,0.4);
+}
+
+.confirm:active {
+
+    transform:
+        scale(0.97);
 }
 
 
-/* ---------------- SUCCESS ---------------- */
+/* ================= SUCCESS ================= */
 
 .success-heart {
 
@@ -474,6 +525,8 @@ input:focus {
     font-weight: 600;
 
     font-size: 15px;
+
+    line-height: 1.6;
 }
 
 .final-text {
@@ -498,16 +551,18 @@ input:focus {
 @keyframes kissFloat {
 
     0%,100% {
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: translateY(-10px);
+        transform:
+            translateY(-10px);
     }
 }
 
 
-/* ---------------- MOBILE ---------------- */
+/* ================= MOBILE ================= */
 
 @media(max-width: 400px) {
 
@@ -522,6 +577,10 @@ input:focus {
     .big-heart {
         font-size: 70px;
     }
+
+    .message {
+        font-size: 16px;
+    }
 }
 
 </style>
@@ -534,12 +593,36 @@ input:focus {
 
 <!-- FLOATING HEARTS -->
 
-<div class="heart-bg" style="left:5%; animation-duration:8s;">❤️</div>
-<div class="heart-bg" style="left:15%; animation-duration:11s; animation-delay:2s;">💕</div>
-<div class="heart-bg" style="left:30%; animation-duration:9s; animation-delay:1s;">💗</div>
-<div class="heart-bg" style="left:50%; animation-duration:12s;">💖</div>
-<div class="heart-bg" style="left:70%; animation-duration:10s; animation-delay:3s;">💕</div>
-<div class="heart-bg" style="left:88%; animation-duration:8s; animation-delay:1s;">❤️</div>
+<div class="heart-bg"
+     style="left:5%; animation-duration:8s;">
+     ❤️
+</div>
+
+<div class="heart-bg"
+     style="left:15%; animation-duration:11s; animation-delay:2s;">
+     💕
+</div>
+
+<div class="heart-bg"
+     style="left:30%; animation-duration:9s; animation-delay:1s;">
+     💗
+</div>
+
+<div class="heart-bg"
+     style="left:50%; animation-duration:12s;">
+     💖
+</div>
+
+<div class="heart-bg"
+     style="left:70%; animation-duration:10s; animation-delay:3s;">
+     💕
+</div>
+
+<div class="heart-bg"
+     style="left:88%; animation-duration:8s; animation-delay:1s;">
+     ❤️
+</div>
+
 
 
 <div class="scene">
@@ -547,7 +630,7 @@ input:focus {
 <div class="card" id="card">
 
 
-<!-- ================= QUESTION ================= -->
+<!-- ================= QUESTION SCREEN ================= -->
 
 <div id="questionScreen">
 
@@ -562,11 +645,13 @@ input:focus {
 
     <p class="message">
 
-        Ek chhoti si wish hai... 🫣<br>
+        Ek chhoti si wish hai... 🫣
+
+        <br>
 
         Will you meet me?
 
-        <br>
+        <br><br>
 
         <strong>
             Sirf YES bolna allowed hai 😌❤️
@@ -578,15 +663,17 @@ input:focus {
     <div class="buttons">
 
         <button
-            id="yesBtn"
-            onclick="showDateScreen()">
+            type="button"
+            id="yesBtn">
 
             YES ❤️
 
         </button>
 
 
-        <button id="noBtn">
+        <button
+            type="button"
+            id="noBtn">
 
             NO 😏
 
@@ -598,7 +685,7 @@ input:focus {
 
 
 
-<!-- ================= DATE ================= -->
+<!-- ================= DATE SCREEN ================= -->
 
 <div id="dateScreen" class="hidden">
 
@@ -628,7 +715,7 @@ input:focus {
     <div class="input-group">
 
         <label>
-            📅 Our Day
+            🗓️ Our Day
         </label>
 
         <input
@@ -651,23 +738,22 @@ input:focus {
     </div>
 
 
-  <button
-    type="button"
-    id="confirmDateBtn"
-    class="confirm">
+    <button
+        type="button"
+        id="confirmDateBtn"
+        class="confirm">
 
-    Confirm Our Date 💕✨
+        Confirm Our Date 💕✨
 
-</button>
+    </button>
 
 </div>
 
 
 
-<!-- ================= SUCCESS ================= -->
+<!-- ================= SUCCESS SCREEN ================= -->
 
 <div id="successScreen" class="hidden">
-
 
     <div class="success-heart">
         💖
@@ -744,7 +830,7 @@ input:focus {
 
 
 /* =====================================================
-   GOOGLE APPS SCRIPT URL
+   YOUR GOOGLE APPS SCRIPT URL
    ===================================================== */
 
 const GOOGLE_SCRIPT_URL =
@@ -753,12 +839,52 @@ const GOOGLE_SCRIPT_URL =
 
 
 /* =====================================================
-   NO BUTTON ESCAPE
+   ELEMENTS
    ===================================================== */
 
-const noBtn =
-document.getElementById("noBtn");
+const questionScreen =
+    document.getElementById("questionScreen");
 
+const dateScreen =
+    document.getElementById("dateScreen");
+
+const successScreen =
+    document.getElementById("successScreen");
+
+const yesBtn =
+    document.getElementById("yesBtn");
+
+const noBtn =
+    document.getElementById("noBtn");
+
+const confirmDateBtn =
+    document.getElementById("confirmDateBtn");
+
+
+
+/* =====================================================
+   YES BUTTON
+   ===================================================== */
+
+yesBtn.addEventListener(
+    "click",
+    function() {
+
+        questionScreen
+            .classList
+            .add("hidden");
+
+        dateScreen
+            .classList
+            .remove("hidden");
+    }
+);
+
+
+
+/* =====================================================
+   NO BUTTON ESCAPE
+   ===================================================== */
 
 function moveNoButton() {
 
@@ -766,12 +892,18 @@ function moveNoButton() {
         document.querySelector(".buttons");
 
     const maxX =
-        container.clientWidth -
-        noBtn.offsetWidth;
+        Math.max(
+            0,
+            container.clientWidth -
+            noBtn.offsetWidth
+        );
 
     const maxY =
-        container.clientHeight -
-        noBtn.offsetHeight;
+        Math.max(
+            0,
+            container.clientHeight -
+            noBtn.offsetHeight
+        );
 
     const x =
         Math.random() * maxX;
@@ -795,9 +927,9 @@ noBtn.addEventListener(
 
 noBtn.addEventListener(
     "touchstart",
-    function(e) {
+    function(event) {
 
-        e.preventDefault();
+        event.preventDefault();
 
         moveNoButton();
     }
@@ -806,116 +938,53 @@ noBtn.addEventListener(
 
 
 /* =====================================================
-   YES SCREEN
+   CONFIRM DATE BUTTON
    ===================================================== */
 
-function showDateScreen() {
-
-    document
-        .getElementById("questionScreen")
-        .classList.add("hidden");
-
-
-    document
-        .getElementById("dateScreen")
-        .classList.remove("hidden");
-}
+confirmDateBtn.addEventListener(
+    "click",
+    confirmDate
+);
 
 
 
 /* =====================================================
-   CONFIRM DATE
+   CONFIRM DATE FUNCTION
    ===================================================== */
 
 function confirmDate() {
 
     const date =
-        document.getElementById("meetingDate").value;
+        document.getElementById(
+            "meetingDate"
+        ).value;
 
     const time =
-        document.getElementById("meetingTime").value;
+        document.getElementById(
+            "meetingTime"
+        ).value;
+
+
+    /* Check date/time */
 
     if (!date || !time) {
 
-        alert("Pehle date aur time choose karo madam ji 😌❤️");
+        alert(
+            "Pehle date aur time choose karo madam ji 😌❤️"
+        );
 
         return;
     }
 
-    // Format date
-    const selectedDate =
-        new Date(date + "T00:00:00");
 
-    const formattedDate =
-        selectedDate.toLocaleDateString(
-            "en-IN",
-            {
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
+    /* ===============================
+       FORMAT DATE
+       =============================== */
+
+    const selectedDate =
+        new Date(
+            date + "T00:00:00"
         );
-
-    // Show selected date
-    document.getElementById("finalDate").innerText =
-        formattedDate;
-
-    // Show selected time
-    document.getElementById("finalTime").innerText =
-        formatTime(time);
-
-
-    // Save to Google Sheet
-    if (
-        GOOGLE_SCRIPT_URL &&
-        GOOGLE_SCRIPT_URL !==
-        "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE"
-    ) {
-
-        const formData =
-            new URLSearchParams();
-
-        formData.append("date", date);
-        formData.append("time", time);
-
-        fetch(
-            GOOGLE_SCRIPT_URL,
-            {
-                method: "POST",
-                mode: "no-cors",
-                body: formData
-            }
-        ).catch(error => {
-            console.log(
-                "Google Sheet error:",
-                error
-            );
-        });
-    }
-
-
-    // Change screen
-    document
-        .getElementById("dateScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("successScreen")
-        .classList.remove("hidden");
-
-
-    // Start countdown
-    startCountdown(
-        date,
-        time
-    );
-}
-
-
-    /* Display date */
-
-    const selectedDate =
-        new Date(date + "T00:00:00");
 
 
     const formattedDate =
@@ -935,16 +1004,24 @@ function confirmDate() {
         formattedDate;
 
 
-    document.getElementById(
-        "finalTime"
-    ).innerText =
+    /* ===============================
+       FORMAT TIME
+       =============================== */
+
+    const formattedTime =
         formatTime(time);
 
 
+    document.getElementById(
+        "finalTime"
+    ).innerText =
+        formattedTime;
 
-    /* =================================================
+
+
+    /* ===============================
        SAVE TO GOOGLE SHEET
-       ================================================= */
+       =============================== */
 
     const formData =
         new URLSearchParams();
@@ -964,28 +1041,56 @@ function confirmDate() {
         GOOGLE_SCRIPT_URL,
         {
             method: "POST",
+
             mode: "no-cors",
-            body: formData
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded"
+            },
+
+            body:
+                formData.toString()
+        }
+    )
+    .then(
+        function() {
+
+            console.log(
+                "Date sent to Google Sheet"
+            );
+
         }
     )
     .catch(
-        error =>
-        console.log(error)
+        function(error) {
+
+            console.error(
+                "Google Sheet Error:",
+                error
+            );
+
+        }
     );
 
 
 
-    /* Change screen */
+    /* ===============================
+       SHOW SUCCESS SCREEN
+       =============================== */
 
-    document
-        .getElementById("dateScreen")
-        .classList.add("hidden");
+    dateScreen
+        .classList
+        .add("hidden");
+
+    successScreen
+        .classList
+        .remove("hidden");
 
 
-    document
-        .getElementById("successScreen")
-        .classList.remove("hidden");
-
+    /* ===============================
+       START COUNTDOWN
+       =============================== */
 
     startCountdown(
         date,
@@ -1001,18 +1106,28 @@ function confirmDate() {
 
 function formatTime(time) {
 
-    const [hour, minute] =
+    const parts =
         time.split(":");
 
-    const date =
+    const hour =
+        parseInt(parts[0]);
+
+    const minute =
+        parts[1];
+
+
+    const tempDate =
         new Date();
 
-    date.setHours(
+    tempDate.setHours(
         hour,
-        minute
+        parseInt(minute),
+        0,
+        0
     );
 
-    return date.toLocaleTimeString(
+
+    return tempDate.toLocaleTimeString(
         "en-IN",
         {
             hour: "numeric",
@@ -1035,7 +1150,9 @@ function startCountdown(
 
     const target =
         new Date(
-            date + "T" + time
+            date +
+            "T" +
+            time
         );
 
 
@@ -1043,7 +1160,6 @@ function startCountdown(
 
         const now =
             new Date();
-
 
         const difference =
             target - now;
@@ -1070,24 +1186,21 @@ function startCountdown(
         const hours =
             Math.floor(
                 (difference /
-                (1000 * 60 * 60)) %
-                24
+                (1000 * 60 * 60)) % 24
             );
 
 
         const minutes =
             Math.floor(
                 (difference /
-                (1000 * 60)) %
-                60
+                (1000 * 60)) % 60
             );
 
 
         const seconds =
             Math.floor(
                 (difference /
-                1000) %
-                60
+                1000) % 60
             );
 
 
@@ -1095,11 +1208,11 @@ function startCountdown(
             "countdown"
         ).innerHTML =
 
-            `⏳ Our meeting in
-            ${days} Days
-            ${hours} Hours
-            ${minutes} Minutes
-            ${seconds} Seconds ❤️`;
+        `⏳ Our meeting in
+        ${days} Days
+        ${hours} Hours
+        ${minutes} Minutes
+        ${seconds} Seconds ❤️`;
     }
 
 
@@ -1115,29 +1228,36 @@ function startCountdown(
 
 
 /* =====================================================
-   3D CARD MOVEMENT
+   3D MOUSE EFFECT
    ===================================================== */
 
 const card =
-document.getElementById("card");
+    document.getElementById("card");
 
 
 document.addEventListener(
     "mousemove",
-    function(e) {
+    function(event) {
 
-        if (window.innerWidth < 600)
+        if (
+            window.innerWidth < 600
+        ) {
             return;
+        }
 
 
         const x =
-            (window.innerWidth / 2 - e.clientX)
-            / 35;
+            (
+                window.innerWidth / 2 -
+                event.clientX
+            ) / 35;
 
 
         const y =
-            (window.innerHeight / 2 - e.clientY)
-            / 35;
+            (
+                window.innerHeight / 2 -
+                event.clientY
+            ) / 35;
 
 
         card.style.transform =
@@ -1155,7 +1275,6 @@ document.addEventListener(
             "rotateY(0deg) rotateX(0deg)";
     }
 );
-document.getElementById("confirmDateBtn").addEventListener("click", confirmDate);
 
 </script>
 
