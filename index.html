@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.95);
+    padding: 35px 25px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.heart {
+    font-size: 65px;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+h1 {
+    color: #e63967;
+    margin: 15px 0;
+    font-size: 28px;
+}
+
+p {
+    color: #555;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    position: relative;
+    height: 90px;
+}
+
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 30px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: #ff477e;
+    color: white;
+    margin-right: 10px;
+    box-shadow: 0 5px 15px rgba(255,71,126,0.3);
+}
+
+#noBtn {
+    background: #eee;
+    color: #555;
+    position: absolute;
+    transition: all 0.2s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+.date-box {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin: 12px 0 6px;
+    color: #555;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 2px solid #ffd0dc;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.confirm {
+    margin-top: 20px;
+    background: #ff477e;
+    color: white;
+    width: 100%;
+}
+
+.success {
+    font-size: 20px;
+    color: #e63967;
+    line-height: 1.6;
+}
+
+.small {
+    font-size: 14px;
+    color: #999;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- FIRST SCREEN -->
+    <div id="questionScreen">
+
+        <div class="heart">❤️</div>
+
+        <h1>I Want To Meet You 🥺</h1>
+
+        <p>
+            Ek important sa question hai...<br>
+            Will you meet me? 🫣❤️
+        </p>
+
+        <div class="buttons">
+            <button id="yesBtn" onclick="showDateScreen()">
+                YES ❤️
+            </button>
+
+            <button id="noBtn">
+                NO 😏
+            </button>
+        </div>
+
+        <p class="small">
+            Hint: NO option thoda shy hai 😂
+        </p>
+
+    </div>
+
+
+    <!-- DATE SCREEN -->
+    <div id="dateScreen" class="hidden">
+
+        <div class="heart">🥰</div>
+
+        <h1>Yessss! ❤️</h1>
+
+        <p>
+            Mujhe pata tha tum YES bologi 😌❤️<br>
+            Ab batao... kab mil rahi ho?
+        </p>
+
+        <div class="date-box">
+
+            <label>📅 Date</label>
+            <input type="date" id="meetingDate">
+
+            <label>🕐 Time</label>
+            <input type="time" id="meetingTime">
+
+            <button class="confirm" onclick="confirmDate()">
+                Confirm Our Date 💕
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUCCESS SCREEN -->
+    <div id="successScreen" class="hidden">
+
+        <div class="heart">💖</div>
+
+        <h1>It's A Date! 🥰</h1>
+
+        <p class="success">
+            Finallyyy! ❤️<br><br>
+
+            Hum mil rahe hain on<br>
+
+            <strong id="finalDate"></strong>
+            <br>
+            at
+            <strong id="finalTime"></strong>
+            🥰
+        </p>
+
+        <p>
+            Ab cancel karne ka option nahi hai... 😌😂❤️
+        </p>
+
+        <div class="heart">💋</div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const noBtn = document.getElementById("noBtn");
+
+function moveNoButton() {
+
+    const container = document.querySelector(".buttons");
+
+    const maxX = container.clientWidth - noBtn.offsetWidth;
+    const maxY = container.clientHeight - noBtn.offsetHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+noBtn.addEventListener("touchstart", function(e) {
+    e.preventDefault();
+    moveNoButton();
+});
+
+
+function showDateScreen() {
+
+    document.getElementById("questionScreen")
+        .classList.add("hidden");
+
+    document.getElementById("dateScreen")
+        .classList.remove("hidden");
+}
+
+
+function confirmDate() {
+
+    const date = document.getElementById("meetingDate").value;
+    const time = document.getElementById("meetingTime").value;
+
+    if (!date || !time) {
+        alert("Date aur time choose karo madam ji 😌❤️");
+        return;
+    }
+
+    const selectedDate = new Date(date + "T00:00:00");
+
+    const formattedDate = selectedDate.toLocaleDateString(
+        "en-IN",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
+
+    document.getElementById("finalDate").innerText =
+        formattedDate;
+
+    document.getElementById("finalTime").innerText =
+        time;
+
+    document.getElementById("dateScreen")
+        .classList.add("hidden");
+
+    document.getElementById("successScreen")
+        .classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
