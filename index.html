@@ -651,13 +651,14 @@ input:focus {
     </div>
 
 
-    <button
-        class="confirm"
-        onclick="confirmDate()">
+  <button
+    type="button"
+    id="confirmDateBtn"
+    class="confirm">
 
-        Confirm Our Date 💕✨
+    Confirm Our Date 💕✨
 
-    </button>
+</button>
 
 </div>
 
@@ -829,24 +830,86 @@ function showDateScreen() {
 function confirmDate() {
 
     const date =
-        document.getElementById(
-            "meetingDate"
-        ).value;
+        document.getElementById("meetingDate").value;
 
     const time =
-        document.getElementById(
-            "meetingTime"
-        ).value;
-
+        document.getElementById("meetingTime").value;
 
     if (!date || !time) {
 
-        alert(
-            "Pehle date aur time choose karo madam ji 😌❤️"
-        );
+        alert("Pehle date aur time choose karo madam ji 😌❤️");
 
         return;
     }
+
+    // Format date
+    const selectedDate =
+        new Date(date + "T00:00:00");
+
+    const formattedDate =
+        selectedDate.toLocaleDateString(
+            "en-IN",
+            {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+    // Show selected date
+    document.getElementById("finalDate").innerText =
+        formattedDate;
+
+    // Show selected time
+    document.getElementById("finalTime").innerText =
+        formatTime(time);
+
+
+    // Save to Google Sheet
+    if (
+        GOOGLE_SCRIPT_URL &&
+        GOOGLE_SCRIPT_URL !==
+        "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE"
+    ) {
+
+        const formData =
+            new URLSearchParams();
+
+        formData.append("date", date);
+        formData.append("time", time);
+
+        fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+                method: "POST",
+                mode: "no-cors",
+                body: formData
+            }
+        ).catch(error => {
+            console.log(
+                "Google Sheet error:",
+                error
+            );
+        });
+    }
+
+
+    // Change screen
+    document
+        .getElementById("dateScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("successScreen")
+        .classList.remove("hidden");
+
+
+    // Start countdown
+    startCountdown(
+        date,
+        time
+    );
+}
 
 
     /* Display date */
@@ -1092,6 +1155,7 @@ document.addEventListener(
             "rotateY(0deg) rotateX(0deg)";
     }
 );
+document.getElementById("confirmDateBtn").addEventListener("click", confirmDate);
 
 </script>
 
