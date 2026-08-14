@@ -1,41 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Just For You ❤️</title>
+<title>Our Little Date ❤️</title>
 
 <style>
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-
     min-height: 100vh;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    background:
-        radial-gradient(circle at 20% 20%, #ffd6e0, transparent 35%),
-        radial-gradient(circle at 80% 80%, #f9b4c8, transparent 35%),
-        linear-gradient(
-            135deg,
-            #ffdde6,
-            #f7a9bd,
-            #ffdce7
-        );
+    font-family: Arial, sans-serif;
 
     display: flex;
     justify-content: center;
@@ -43,373 +24,230 @@ body {
 
     overflow: hidden;
 
-    perspective: 1200px;
+    background:
+        radial-gradient(circle at 20% 20%, #ffd9e4, transparent 35%),
+        radial-gradient(circle at 80% 80%, #f6a7bd, transparent 35%),
+        linear-gradient(135deg, #ffdce6, #f5a6bc);
+
+    perspective: 1000px;
 }
 
+/* Floating hearts */
 
-/* ================= FLOATING HEARTS ================= */
-
-.heart-bg {
-
+.bg-heart {
     position: fixed;
-
-    bottom: -50px;
-
+    bottom: -60px;
     font-size: 25px;
-
-    opacity: 0.6;
-
-    animation:
-        floatHeart linear infinite;
-
+    animation: floatUp 9s linear infinite;
     pointer-events: none;
-
-    z-index: 0;
+    z-index: 1;
 }
 
-@keyframes floatHeart {
-
+@keyframes floatUp {
     0% {
-        transform:
-            translateY(0)
-            rotate(0deg)
-            scale(0.7);
-
+        transform: translateY(0) rotate(0);
         opacity: 0;
     }
 
     20% {
-        opacity: 0.7;
+        opacity: .8;
     }
 
     100% {
-        transform:
-            translateY(-110vh)
-            rotate(360deg)
-            scale(1.3);
-
+        transform: translateY(-110vh) rotate(360deg);
         opacity: 0;
     }
 }
 
+/* Main */
 
-/* ================= CARD ================= */
-
-.scene {
-
+.wrapper {
     width: 92%;
-    max-width: 450px;
-
+    max-width: 460px;
     position: relative;
-
     z-index: 10;
-
-    transform-style: preserve-3d;
 }
 
 .card {
 
-    position: relative;
-
-    padding: 40px 28px;
-
-    border-radius: 32px;
-
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.96),
-            rgba(255,235,242,0.90)
+            rgba(255,255,255,.97),
+            rgba(255,235,243,.94)
         );
 
-    border:
-        1px solid rgba(255,255,255,0.9);
+    border-radius: 32px;
 
-    box-shadow:
-
-        0 35px 80px
-        rgba(180,60,100,0.25),
-
-        inset 0 1px 1px
-        rgba(255,255,255,0.9);
+    padding: 38px 28px;
 
     text-align: center;
 
+    border: 1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 30px 70px rgba(190,50,100,.25),
+        inset 0 1px 2px white;
+
     transform-style: preserve-3d;
 
-    animation:
-        cardEntrance 1s ease;
+    animation: cardIn .8s ease;
 
-    transition:
-        transform 0.2s ease;
+    transition: transform .2s ease;
 }
 
-@keyframes cardEntrance {
+@keyframes cardIn {
 
     from {
-
         opacity: 0;
-
-        transform:
-            rotateX(20deg)
-            translateY(60px)
-            scale(0.9);
+        transform: translateY(50px) rotateX(15deg);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-            rotateX(0)
-            translateY(0)
-            scale(1);
+        transform: translateY(0) rotateX(0);
     }
 }
 
+/* Heart */
 
-/* ================= HEART ================= */
+.main-heart {
 
-.big-heart {
-
-    font-size: 85px;
+    font-size: 82px;
 
     display: inline-block;
 
-    transform-style: preserve-3d;
+    animation: heartbeat 1.4s infinite;
 
     filter:
         drop-shadow(
             0 15px 15px
-            rgba(230,40,90,0.3)
+            rgba(220,40,90,.25)
         );
-
-    animation:
-        heartBeat 1.5s infinite;
-
-    margin-bottom: 10px;
 }
 
-@keyframes heartBeat {
+@keyframes heartbeat {
 
     0%,100% {
-        transform:
-            translateZ(30px)
-            scale(1);
+        transform: scale(1);
     }
 
     50% {
-        transform:
-            translateZ(70px)
-            scale(1.12);
+        transform: scale(1.12);
     }
 }
 
-
-/* ================= TEXT ================= */
-
 h1 {
-
-    color: #e83369;
-
+    color: #e72e67;
     font-size: 32px;
-
-    margin-bottom: 15px;
-
-    text-shadow:
-        0 5px 15px
-        rgba(232,51,105,0.15);
-
-    transform:
-        translateZ(35px);
+    margin: 12px 0 15px;
 }
 
 .message {
-
     color: #666;
-
     font-size: 17px;
-
     line-height: 1.6;
-
-    margin-bottom: 28px;
-
-    transform:
-        translateZ(25px);
+    margin-bottom: 25px;
 }
-
-
-/* ================= BUTTONS ================= */
-
-.buttons {
-
-    position: relative;
-
-    height: 90px;
-
-    transform:
-        translateZ(40px);
-}
-
-button {
-
-    border: none;
-
-    cursor: pointer;
-
-    font-size: 17px;
-
-    font-weight: 700;
-
-    padding: 14px 28px;
-
-    border-radius: 50px;
-
-    transition: 0.25s;
-
-    font-family: inherit;
-}
-
-#yesBtn {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff3f78,
-            #e91e63
-        );
-
-    box-shadow:
-        0 10px 25px
-        rgba(233,30,99,0.35),
-
-        inset 0 1px 1px
-        rgba(255,255,255,0.5);
-
-    position: relative;
-
-    z-index: 20;
-}
-
-#yesBtn:hover {
-
-    transform:
-        translateY(-4px)
-        scale(1.05);
-
-    box-shadow:
-        0 15px 30px
-        rgba(233,30,99,0.45);
-}
-
-#noBtn {
-
-    position: absolute;
-
-    left: 58%;
-
-    top: 5px;
-
-    color: #777;
-
-    background: #f1f1f1;
-
-    box-shadow:
-        0 7px 15px
-        rgba(0,0,0,0.1);
-
-    z-index: 20;
-}
-
-
-/* ================= HIDDEN ================= */
 
 .hidden {
     display: none !important;
 }
 
+/* First buttons */
 
-/* ================= DATE SCREEN ================= */
-
-.date-title {
-
-    font-size: 30px;
-
-    color: #e83369;
-
-    margin-bottom: 12px;
+.button-area {
+    position: relative;
+    height: 80px;
 }
 
-.date-sub {
+button {
+    font-family: Arial, sans-serif;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: bold;
+}
 
+.yes {
+    background: linear-gradient(135deg,#ff477e,#df1f60);
+    color: white;
+    padding: 15px 32px;
+
+    box-shadow:
+        0 10px 25px rgba(220,30,90,.3);
+}
+
+.no {
+    position: absolute;
+    left: 58%;
+    top: 2px;
+
+    background: #eee;
+    color: #666;
+
+    padding: 15px 28px;
+}
+
+/* Date */
+
+.date-description {
     color: #777;
-
+    font-size: 17px;
+    line-height: 1.5;
     margin-bottom: 25px;
 }
 
-.input-group {
-
+.field {
     text-align: left;
-
-    margin-bottom: 18px;
-
-    position: relative;
-
-    z-index: 20;
+    margin-bottom: 20px;
 }
 
-label {
-
+.field label {
     display: block;
-
-    font-weight: 600;
-
-    color: #d92e62;
-
-    margin-bottom: 7px;
+    color: #d92c61;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
-input {
+.field input {
 
     width: 100%;
 
-    padding: 14px;
+    height: 62px;
 
-    border-radius: 15px;
+    border-radius: 18px;
 
-    border: 2px solid #ffd0dc;
+    border: 2px solid #ffc9d8;
 
-    background:
-        rgba(255,255,255,0.9);
+    background: rgba(255,255,255,.9);
 
-    font-size: 16px;
+    padding: 0 16px;
+
+    font-size: 17px;
+
+    color: #333;
 
     outline: none;
-
-    transition: 0.2s;
-
-    position: relative;
-
-    z-index: 20;
 }
 
-input:focus {
-
-    border-color: #ff5c8a;
+.field input:focus {
+    border-color: #ff477e;
 
     box-shadow:
         0 0 0 4px
-        rgba(255,92,138,0.1);
+        rgba(255,71,126,.1);
 }
 
-
-/* ================= CONFIRM BUTTON ================= */
+/* CONFIRM */
 
 .confirm {
 
     width: 100%;
+
+    height: 64px;
 
     margin-top: 5px;
 
@@ -419,99 +257,61 @@ input:focus {
         linear-gradient(
             135deg,
             #ff477e,
-            #d91e60
+            #dd1e60
         );
 
     box-shadow:
-        0 10px 25px
-        rgba(217,30,96,0.3);
+        0 12px 30px
+        rgba(220,30,90,.35);
 
     position: relative;
 
-    z-index: 100;
+    z-index: 9999;
 
     pointer-events: auto;
 
     cursor: pointer;
 
-    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .confirm:hover {
-
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 15px 30px
-        rgba(217,30,96,0.4);
+    transform: translateY(-3px);
 }
 
 .confirm:active {
-
-    transform:
-        scale(0.97);
+    transform: scale(.97);
 }
 
-
-/* ================= SUCCESS ================= */
+/* Success */
 
 .success-heart {
-
     font-size: 90px;
-
-    animation:
-        successHeart 1.5s infinite;
-
-    filter:
-        drop-shadow(
-            0 15px 20px
-            rgba(230,40,90,0.3)
-        );
+    animation: heartbeat 1.4s infinite;
 }
 
-@keyframes successHeart {
+.success-box {
 
-    0%,100% {
-        transform:
-            rotate(-5deg)
-            scale(1);
-    }
+    margin-top: 20px;
 
-    50% {
-        transform:
-            rotate(5deg)
-            scale(1.12);
-    }
-}
+    padding: 22px;
 
-.date-result {
+    border-radius: 22px;
 
-    margin-top: 25px;
-
-    padding: 20px;
-
-    border-radius: 20px;
-
-    background:
-        rgba(255,255,255,0.7);
-
-    box-shadow:
-        inset 0 0 20px
-        rgba(255,80,130,0.08);
+    background: rgba(255,255,255,.75);
 
     color: #555;
 
     font-size: 17px;
 }
 
-.date-result strong {
+.success-box strong {
 
     display: block;
 
-    color: #e83369;
+    color: #e72e67;
 
-    font-size: 22px;
+    font-size: 23px;
 
     margin: 8px 0;
 }
@@ -520,18 +320,16 @@ input:focus {
 
     margin-top: 20px;
 
-    color: #d92e62;
+    color: #d92c61;
 
-    font-weight: 600;
-
-    font-size: 15px;
+    font-weight: bold;
 
     line-height: 1.6;
 }
 
-.final-text {
+.final-message {
 
-    margin-top: 22px;
+    margin-top: 20px;
 
     color: #555;
 
@@ -539,108 +337,57 @@ input:focus {
 }
 
 .kiss {
-
     font-size: 55px;
-
-    margin-top: 20px;
-
-    animation:
-        kissFloat 2s infinite;
+    margin-top: 15px;
 }
 
-@keyframes kissFloat {
+/* Mobile */
 
-    0%,100% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(-10px);
-    }
-}
-
-
-/* ================= MOBILE ================= */
-
-@media(max-width: 400px) {
+@media(max-width:420px) {
 
     .card {
-        padding: 32px 20px;
+        padding: 30px 20px;
     }
 
     h1 {
         font-size: 28px;
     }
 
-    .big-heart {
+    .main-heart {
         font-size: 70px;
-    }
-
-    .message {
-        font-size: 16px;
     }
 }
 
 </style>
-
 </head>
-
 
 <body>
 
 
 <!-- FLOATING HEARTS -->
 
-<div class="heart-bg"
-     style="left:5%; animation-duration:8s;">
-     ❤️
-</div>
-
-<div class="heart-bg"
-     style="left:15%; animation-duration:11s; animation-delay:2s;">
-     💕
-</div>
-
-<div class="heart-bg"
-     style="left:30%; animation-duration:9s; animation-delay:1s;">
-     💗
-</div>
-
-<div class="heart-bg"
-     style="left:50%; animation-duration:12s;">
-     💖
-</div>
-
-<div class="heart-bg"
-     style="left:70%; animation-duration:10s; animation-delay:3s;">
-     💕
-</div>
-
-<div class="heart-bg"
-     style="left:88%; animation-duration:8s; animation-delay:1s;">
-     ❤️
-</div>
+<div class="bg-heart" style="left:5%;animation-delay:0s;">❤️</div>
+<div class="bg-heart" style="left:20%;animation-delay:2s;">💕</div>
+<div class="bg-heart" style="left:40%;animation-delay:4s;">💗</div>
+<div class="bg-heart" style="left:65%;animation-delay:1s;">💖</div>
+<div class="bg-heart" style="left:85%;animation-delay:3s;">💕</div>
 
 
-
-<div class="scene">
+<div class="wrapper">
 
 <div class="card" id="card">
 
 
-<!-- ================= QUESTION SCREEN ================= -->
+<!-- ================= QUESTION ================= -->
 
-<div id="questionScreen">
+<div id="question">
 
-    <div class="big-heart">
+    <div class="main-heart">
         💖
     </div>
 
     <h1>
-        I Want To Meet You
-        🥺❤️
+        I Want To Meet You 🥺❤️
     </h1>
 
     <p class="message">
@@ -653,18 +400,19 @@ input:focus {
 
         <br><br>
 
-        <strong>
+        <b>
             Sirf YES bolna allowed hai 😌❤️
-        </strong>
+        </b>
 
     </p>
 
 
-    <div class="buttons">
+    <div class="button-area">
 
         <button
             type="button"
-            id="yesBtn">
+            class="yes"
+            onclick="showDate()">
 
             YES ❤️
 
@@ -673,7 +421,10 @@ input:focus {
 
         <button
             type="button"
-            id="noBtn">
+            class="no"
+            id="noButton"
+            onmouseover="escapeNo()"
+            ontouchstart="escapeNo()">
 
             NO 😏
 
@@ -685,19 +436,19 @@ input:focus {
 
 
 
-<!-- ================= DATE SCREEN ================= -->
+<!-- ================= DATE ================= -->
 
-<div id="dateScreen" class="hidden">
+<div id="datePage" class="hidden">
 
-    <div class="big-heart">
+    <div class="main-heart">
         🥰
     </div>
 
-    <h1 class="date-title">
+    <h1>
         Yessss! ❤️
     </h1>
 
-    <p class="date-sub">
+    <p class="date-description">
 
         Mujhe pata tha tum YES bologi 😌
 
@@ -705,14 +456,11 @@ input:focus {
 
         Ab batao...
 
-        <strong>
-            kab mil rahi ho? 💕
-        </strong>
-
+        <b>kab mil rahi ho?</b> 💕
     </p>
 
 
-    <div class="input-group">
+    <div class="field">
 
         <label>
             🗓️ Our Day
@@ -725,7 +473,7 @@ input:focus {
     </div>
 
 
-    <div class="input-group">
+    <div class="field">
 
         <label>
             🕐 Our Time
@@ -738,10 +486,12 @@ input:focus {
     </div>
 
 
+    <!-- DIRECT ONCLICK -->
+
     <button
         type="button"
-        id="confirmDateBtn"
-        class="confirm">
+        class="confirm"
+        onclick="confirmDate()">
 
         Confirm Our Date 💕✨
 
@@ -751,19 +501,17 @@ input:focus {
 
 
 
-<!-- ================= SUCCESS SCREEN ================= -->
+<!-- ================= SUCCESS ================= -->
 
-<div id="successScreen" class="hidden">
+<div id="successPage" class="hidden">
 
     <div class="success-heart">
         💖
     </div>
 
-
     <h1>
         It's A Date! 🥰
     </h1>
-
 
     <p class="message">
 
@@ -776,16 +524,16 @@ input:focus {
     </p>
 
 
-    <div class="date-result">
+    <div class="success-box">
 
         Hum mil rahe hain
 
-        <strong id="finalDate">
+        <strong id="showDate">
         </strong>
 
         at
 
-        <strong id="finalTime">
+        <strong id="showTime">
         </strong>
 
         🥰
@@ -800,15 +548,15 @@ input:focus {
     </div>
 
 
-    <p class="final-text">
+    <p class="final-message">
 
         Ab cancel karne ka option nahi hai...
 
         <br>
 
-        <strong>
+        <b>
             Tumne khud YES bola hai 😏😂❤️
-        </strong>
+        </b>
 
     </p>
 
@@ -828,136 +576,74 @@ input:focus {
 
 <script>
 
-
 /* =====================================================
-   YOUR GOOGLE APPS SCRIPT URL
+   GOOGLE SHEET URL
    ===================================================== */
 
 const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbz6JcomZDtt5BSYbzW1kWJ3VOwxLYJFQhPUQtXIPkW3ITXcCgNM7P6DliAsJVdrpWV5/exec";
 
 
-
 /* =====================================================
-   ELEMENTS
+   SHOW DATE PAGE
    ===================================================== */
 
-const questionScreen =
-    document.getElementById("questionScreen");
+function showDate() {
 
-const dateScreen =
-    document.getElementById("dateScreen");
+    document
+        .getElementById("question")
+        .classList
+        .add("hidden");
 
-const successScreen =
-    document.getElementById("successScreen");
-
-const yesBtn =
-    document.getElementById("yesBtn");
-
-const noBtn =
-    document.getElementById("noBtn");
-
-const confirmDateBtn =
-    document.getElementById("confirmDateBtn");
-
-
-
-/* =====================================================
-   YES BUTTON
-   ===================================================== */
-
-yesBtn.addEventListener(
-    "click",
-    function() {
-
-        questionScreen
-            .classList
-            .add("hidden");
-
-        dateScreen
-            .classList
-            .remove("hidden");
-    }
-);
-
-
-
-/* =====================================================
-   NO BUTTON ESCAPE
-   ===================================================== */
-
-function moveNoButton() {
-
-    const container =
-        document.querySelector(".buttons");
-
-    const maxX =
-        Math.max(
-            0,
-            container.clientWidth -
-            noBtn.offsetWidth
-        );
-
-    const maxY =
-        Math.max(
-            0,
-            container.clientHeight -
-            noBtn.offsetHeight
-        );
-
-    const x =
-        Math.random() * maxX;
-
-    const y =
-        Math.random() * maxY;
-
-    noBtn.style.left =
-        x + "px";
-
-    noBtn.style.top =
-        y + "px";
+    document
+        .getElementById("datePage")
+        .classList
+        .remove("hidden");
 }
 
 
-noBtn.addEventListener(
-    "mouseenter",
-    moveNoButton
-);
-
-
-noBtn.addEventListener(
-    "touchstart",
-    function(event) {
-
-        event.preventDefault();
-
-        moveNoButton();
-    }
-);
-
-
-
 /* =====================================================
-   CONFIRM DATE BUTTON
+   NO BUTTON
    ===================================================== */
 
-confirmDateBtn.addEventListener(
-    "click",
-    confirmDate
-);
+function escapeNo() {
 
+    const button =
+        document.getElementById("noButton");
+
+    const area =
+        document.querySelector(".button-area");
+
+    const maxX =
+        area.clientWidth -
+        button.offsetWidth;
+
+    const maxY =
+        area.clientHeight -
+        button.offsetHeight;
+
+    button.style.left =
+        Math.random() * maxX + "px";
+
+    button.style.top =
+        Math.random() * maxY + "px";
+}
 
 
 /* =====================================================
-   CONFIRM DATE FUNCTION
+   CONFIRM DATE
    ===================================================== */
 
 function confirmDate() {
+
+    console.log("CONFIRM BUTTON CLICKED");
+
 
     const date =
         document.getElementById(
             "meetingDate"
         ).value;
+
 
     const time =
         document.getElementById(
@@ -965,30 +651,38 @@ function confirmDate() {
         ).value;
 
 
-    /* Check date/time */
+    /* CHECK */
 
-    if (!date || !time) {
+    if (!date) {
 
         alert(
-            "Pehle date aur time choose karo madam ji 😌❤️"
+            "Pehle date select karo ❤️"
         );
 
         return;
     }
 
 
-    /* ===============================
-       FORMAT DATE
-       =============================== */
+    if (!time) {
 
-    const selectedDate =
+        alert(
+            "Ab time bhi select karo 😌❤️"
+        );
+
+        return;
+    }
+
+
+    /* FORMAT DATE */
+
+    const dateObject =
         new Date(
             date + "T00:00:00"
         );
 
 
-    const formattedDate =
-        selectedDate.toLocaleDateString(
+    const prettyDate =
+        dateObject.toLocaleDateString(
             "en-IN",
             {
                 day: "numeric",
@@ -998,38 +692,62 @@ function confirmDate() {
         );
 
 
+    /* FORMAT TIME */
+
+    const timeParts =
+        time.split(":");
+
+
+    let hour =
+        parseInt(timeParts[0]);
+
+    const minute =
+        timeParts[1];
+
+
+    const ampm =
+        hour >= 12 ? "PM" : "AM";
+
+
+    hour =
+        hour % 12 || 12;
+
+
+    const prettyTime =
+        hour +
+        ":" +
+        minute +
+        " " +
+        ampm;
+
+
+    /* SHOW RESULT */
+
     document.getElementById(
-        "finalDate"
+        "showDate"
     ).innerText =
-        formattedDate;
-
-
-    /* ===============================
-       FORMAT TIME
-       =============================== */
-
-    const formattedTime =
-        formatTime(time);
+        prettyDate;
 
 
     document.getElementById(
-        "finalTime"
+        "showTime"
     ).innerText =
-        formattedTime;
+        prettyTime;
 
 
-
-    /* ===============================
+    /* ===============================================
        SAVE TO GOOGLE SHEET
-       =============================== */
+       =============================================== */
 
     const formData =
         new URLSearchParams();
+
 
     formData.append(
         "date",
         date
     );
+
 
     formData.append(
         "time",
@@ -1057,7 +775,7 @@ function confirmDate() {
         function() {
 
             console.log(
-                "Date sent to Google Sheet"
+                "Saved to Google Sheet"
             );
 
         }
@@ -1065,8 +783,8 @@ function confirmDate() {
     .catch(
         function(error) {
 
-            console.error(
-                "Google Sheet Error:",
+            console.log(
+                "Sheet Error:",
                 error
             );
 
@@ -1074,69 +792,27 @@ function confirmDate() {
     );
 
 
+    /* SHOW SUCCESS */
 
-    /* ===============================
-       SHOW SUCCESS SCREEN
-       =============================== */
-
-    dateScreen
+    document
+        .getElementById("datePage")
         .classList
         .add("hidden");
 
-    successScreen
+
+    document
+        .getElementById("successPage")
         .classList
         .remove("hidden");
 
 
-    /* ===============================
-       START COUNTDOWN
-       =============================== */
+    /* COUNTDOWN */
 
     startCountdown(
         date,
         time
     );
 }
-
-
-
-/* =====================================================
-   FORMAT TIME
-   ===================================================== */
-
-function formatTime(time) {
-
-    const parts =
-        time.split(":");
-
-    const hour =
-        parseInt(parts[0]);
-
-    const minute =
-        parts[1];
-
-
-    const tempDate =
-        new Date();
-
-    tempDate.setHours(
-        hour,
-        parseInt(minute),
-        0,
-        0
-    );
-
-
-    return tempDate.toLocaleTimeString(
-        "en-IN",
-        {
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true
-        }
-    );
-}
-
 
 
 /* =====================================================
@@ -1156,10 +832,11 @@ function startCountdown(
         );
 
 
-    function updateCountdown() {
+    function update() {
 
         const now =
             new Date();
+
 
         const difference =
             target - now;
@@ -1179,21 +856,21 @@ function startCountdown(
         const days =
             Math.floor(
                 difference /
-                (1000 * 60 * 60 * 24)
+                86400000
             );
 
 
         const hours =
             Math.floor(
                 (difference /
-                (1000 * 60 * 60)) % 24
+                3600000) % 24
             );
 
 
         const minutes =
             Math.floor(
                 (difference /
-                (1000 * 60)) % 60
+                60000) % 60
             );
 
 
@@ -1208,32 +885,34 @@ function startCountdown(
             "countdown"
         ).innerHTML =
 
-        `⏳ Our meeting in
-        ${days} Days
-        ${hours} Hours
-        ${minutes} Minutes
-        ${seconds} Seconds ❤️`;
+            "⏳ Our meeting in<br>" +
+
+            days +
+            " Days " +
+
+            hours +
+            " Hours " +
+
+            minutes +
+            " Minutes " +
+
+            seconds +
+            " Seconds ❤️";
     }
 
 
-    updateCountdown();
-
+    update();
 
     setInterval(
-        updateCountdown,
+        update,
         1000
     );
 }
 
 
-
 /* =====================================================
-   3D MOUSE EFFECT
+   3D EFFECT
    ===================================================== */
-
-const card =
-    document.getElementById("card");
-
 
 document.addEventListener(
     "mousemove",
@@ -1246,38 +925,34 @@ document.addEventListener(
         }
 
 
-        const x =
+        const card =
+            document.getElementById("card");
+
+
+        const rotateY =
             (
                 window.innerWidth / 2 -
                 event.clientX
-            ) / 35;
+            ) / 40;
 
 
-        const y =
+        const rotateX =
             (
                 window.innerHeight / 2 -
                 event.clientY
-            ) / 35;
+            ) / 40;
 
 
         card.style.transform =
-            `rotateY(${x}deg)
-             rotateX(${y}deg)`;
-    }
-);
-
-
-document.addEventListener(
-    "mouseleave",
-    function() {
-
-        card.style.transform =
-            "rotateY(0deg) rotateX(0deg)";
+            "rotateY(" +
+            rotateY +
+            "deg) rotateX(" +
+            rotateX +
+            "deg)";
     }
 );
 
 </script>
 
 </body>
-
 </html>
