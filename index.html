@@ -691,11 +691,35 @@ button{
     }
 }
 
+
+.music-control{
+    position:fixed;
+    right:16px;
+    top:16px;
+    z-index:10000;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.8);
+    background:rgba(255,255,255,.85);
+    color:#e62e67;
+    font-size:21px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(180,50,100,.18);
+    backdrop-filter:blur(8px);
+}
+.music-control:active{transform:scale(.94)}
+
 </style>
 </head>
 
 
 <body>
+
+<button id="musicButton" class="music-control" type="button" aria-label="Music">
+    🎵
+</button>
+
 
 
 <!-- FLOATING HEARTS -->
@@ -1481,3 +1505,243 @@ function confirmDate(){
 /* =====================================================
    COUNTDOWN
 ==============================
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+function startCountdown(date,time){
+
+    const target =
+        new Date(date + "T" + time);
+
+    const countdown =
+        document.getElementById("countdown");
+
+    function updateCountdown(){
+
+        const diff =
+            target.getTime() - Date.now();
+
+        if(diff <= 0){
+
+            countdown.innerHTML =
+                "❤️ It's time to meet! ❤️";
+
+            return;
+        }
+
+        const days =
+            Math.floor(diff / 86400000);
+
+        const hours =
+            Math.floor((diff / 3600000) % 24);
+
+        const minutes =
+            Math.floor((diff / 60000) % 60);
+
+        const seconds =
+            Math.floor((diff / 1000) % 60);
+
+        countdown.innerHTML =
+            "⏳ Our meeting in<br>" +
+            days + " Days " +
+            hours + " Hours " +
+            minutes + " Minutes " +
+            seconds + " Seconds ❤️";
+    }
+
+    updateCountdown();
+
+    setInterval(updateCountdown,1000);
+}
+
+
+/* =====================================================
+   ROMANTIC BACKGROUND MUSIC
+   Original browser-generated piano-style melody.
+   It starts after the user taps "Open", so it works
+   with normal browser autoplay restrictions.
+===================================================== */
+
+let audioContext = null;
+let musicTimer = null;
+let musicPlaying = false;
+let musicStep = 0;
+
+const melody = [
+    [261.63, 329.63, 392.00],
+    [293.66, 349.23, 440.00],
+    [329.63, 392.00, 493.88],
+    [293.66, 369.99, 440.00],
+    [261.63, 329.63, 392.00],
+    [246.94, 329.63, 392.00],
+    [220.00, 293.66, 369.99],
+    [246.94, 329.63, 440.00]
+];
+
+function playNote(freq, duration, when){
+
+    if(!audioContext) return;
+
+    const osc =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+    const filter =
+        audioContext.createBiquadFilter();
+
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    filter.type = "lowpass";
+    filter.frequency.value = 1800;
+
+    gain.gain.setValueAtTime(0, when);
+
+    gain.gain.linearRampToValueAtTime(
+        0.055,
+        when + 0.03
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        when + duration
+    );
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioContext.destination);
+
+    osc.start(when);
+    osc.stop(when + duration + 0.05);
+}
+
+function playMelodyStep(){
+
+    if(!audioContext || !musicPlaying) return;
+
+    const chord =
+        melody[musicStep % melody.length];
+
+    const now =
+        audioContext.currentTime;
+
+    playNote(chord[0], 1.9, now);
+    playNote(chord[1], 1.7, now + 0.12);
+    playNote(chord[2], 1.5, now + 0.24);
+
+    musicStep++;
+
+    musicTimer =
+        setTimeout(playMelodyStep, 1700);
+}
+
+function startMusic(){
+
+    if(!audioContext){
+
+        audioContext =
+            new (window.AudioContext ||
+                 window.webkitAudioContext)();
+    }
+
+    if(audioContext.state === "suspended"){
+        audioContext.resume();
+    }
+
+    if(musicPlaying) return;
+
+    musicPlaying = true;
+    musicStep = 0;
+
+    document.getElementById("musicButton").innerText = "🔊";
+
+    playMelodyStep();
+}
+
+function stopMusic(){
+
+    musicPlaying = false;
+
+    if(musicTimer){
+        clearTimeout(musicTimer);
+        musicTimer = null;
+    }
+
+    document.getElementById("musicButton").innerText = "🎵";
+}
+
+function toggleMusic(){
+
+    if(musicPlaying){
+        stopMusic();
+    }else{
+        startMusic();
+    }
+}
+
+
+/* Start music when she opens the message */
+const originalOpenMessage = openMessage;
+
+openMessage = function(){
+
+    originalOpenMessage();
+
+    try{
+        startMusic();
+    }catch(error){
+        console.log("Music could not start:",error);
+    }
+};
+
+
+/* Music button */
+document
+    .getElementById("musicButton")
+    .addEventListener(
+        "click",
+        toggleMusic
+    );
+
+
+/* =====================================================
+   SUBTLE 3D CARD EFFECT
+===================================================== */
+
+const card =
+    document.getElementById("card");
+
+document.addEventListener(
+    "mousemove",
+    function(event){
+
+        if(window.innerWidth < 700) return;
+
+        const x =
+            (window.innerWidth / 2 - event.clientX) / 70;
+
+        const y =
+            (window.innerHeight / 2 - event.clientY) / 70;
+
+        card.style.transform =
+            "rotateY(" + x + "deg) rotateX(" + y + "deg)";
+    }
+);
+
+document.addEventListener(
+    "mouseleave",
+    function(){
+
+        card.style.transform =
+            "rotateY(0deg) rotateX(0deg)";
+    }
+);
+
+</script>
+
+</body>
+</html>
